@@ -8,21 +8,19 @@ namespace AtomicEngine
     public partial class Node : Animatable
     {
 
-        public Component CreateComponent<T>(CreateMode mode = CreateMode.REPLICATED, uint id = 0) where T : Component
+        public T CreateComponent<T>(CreateMode mode = CreateMode.REPLICATED, uint id = 0) where T : Component
         {
             var type = typeof(T);
 
             if (type.IsSubclassOf(typeof(CSComponent)))
             {
-                var component = (CSComponent)Activator.CreateInstance(type);
-                CSComponentCore.RegisterInstance(component);
-
+                Component component = (Component)Activator.CreateInstance(type);
+                CSComponentCore.RegisterInstance((CSComponent) component);
                 AddComponent(component, id, mode);
-
-                return component;
+                return (T) component;
             }
 
-            return CreateComponent(type.Name, mode, id);
+            return (T) CreateComponent(type.Name, mode, id);
         }
 
 

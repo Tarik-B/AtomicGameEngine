@@ -401,6 +401,15 @@ namespace ToolCore
 
         project.CreateChild("Import").SetAttribute("Project", "$(MSBuildToolsPath)\\Microsoft.CSharp.targets");
 
+        if (name_ == "AtomicProject")
+        {
+            XMLElement afterBuild = project.CreateChild("Target");
+            afterBuild.SetAttribute("Name", "AfterBuild");
+            XMLElement copy = afterBuild.CreateChild("Copy");
+            copy.SetAttribute("SourceFiles", "$(TargetPath)");
+            copy.SetAttribute("DestinationFolder", projectPath_ + "../../../Resources/");
+        }
+
         String projectSource = xmlFile_->ToString();
 
         SharedPtr<File> output(new File(context_, projectPath_ + name_ + ".csproj", FILE_WRITE));

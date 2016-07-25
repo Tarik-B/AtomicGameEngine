@@ -257,7 +257,7 @@ void CSFunctionWriter::WriteNativeFunction(String& source)
 
     if (sharedPtrReturn)
     {
-        source += IndentLine("returnValue->AddRef();\n");
+        source += IndentLine("if (returnValue.NotNull()) returnValue->AddRef();\n");
         source += IndentLine("return returnValue;\n");
     }
     else if (returnType == "const char*")

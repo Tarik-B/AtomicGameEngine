@@ -67,6 +67,7 @@ namespace AtomicEngine
             UIModule.Initialize();
             IPCModule.Initialize();
             AtomicAppModule.Initialize();
+            ScriptModule.Initialize();
 
             AtomicNETScriptModule.Initialize();
             AtomicNETNativeModule.Initialize();

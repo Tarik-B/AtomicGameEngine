@@ -289,6 +289,14 @@ namespace AtomicEngine
 
         }
 
+        public static bool IsNativeType(Type type)
+        {
+            if (typeToNativeType.ContainsKey(type))
+                return true;
+
+            return false;
+        }
+
         static public IntPtr NativeContructorOverride
         {
             get
